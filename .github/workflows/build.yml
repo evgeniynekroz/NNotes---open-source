@@ -19,7 +19,7 @@ jobs:
       - name: Generate launcher icons
         run: dart run flutter_launcher_icons
       - name: Build APK
-        run: flutter build apk --release --split-per-abi
+        run: flutter build apk --release
       - uses: actions/upload-artifact@v4
         with:
           name: android-apk
