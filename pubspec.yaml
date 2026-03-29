@@ -1,0 +1,43 @@
+name: NNotes
+description: NNotes — Super Notes
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.3.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  hive: ^2.2.3
+  hive_flutter: ^1.1.0
+  flutter_markdown: ^0.7.3
+  flutter_math_fork: ^0.7.2
+  fl_chart: ^0.69.0
+  math_expressions: ^2.6.0
+  local_auth: ^2.3.0
+  flutter_local_notifications: ^17.2.4
+  url_launcher: ^6.3.1
+  flutter_colorpicker: ^1.1.0
+  google_fonts: ^6.2.1
+  uuid: ^4.5.1
+  intl: ^0.19.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
+  flutter_launcher_icons: ^0.14.1
+
+flutter_launcher_icons:
+  android: true
+  ios: false
+  image_path: "assets/icon/icon.png"
+  adaptive_icon_background: "#977DFF"
+  adaptive_icon_foreground: "assets/icon/icon_fg.png"
+  min_sdk_android: 21
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/icon/
