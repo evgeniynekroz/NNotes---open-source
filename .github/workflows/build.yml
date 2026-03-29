@@ -3,7 +3,7 @@ on:
   push:
     branches: [main]
 jobs:
-  build:
+  android:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -12,10 +12,15 @@ jobs:
           flutter-version: '3.22.0'
           channel: stable
           cache: true
-      - run: flutter pub get
-      - run: dart run flutter_launcher_icons
-      - run: flutter build apk --release --split-per-abi
+      - name: Create Flutter project skeleton
+        run: flutter create --project-name nnotes --org com.nekroz .
+      - name: Install dependencies
+        run: flutter pub get
+      - name: Generate launcher icons
+        run: dart run flutter_launcher_icons
+      - name: Build APK
+        run: flutter build apk --release --split-per-abi
       - uses: actions/upload-artifact@v4
         with:
-          name: apk
+          name: android-apk
           path: build/app/outputs/flutter-apk/*.apk
