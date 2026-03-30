@@ -73,7 +73,7 @@ flutter run
 
 ## 👨‍💻 РАЗРАБОТЧИК
 
-**Evgeniy Nekroz** — Aspiring Fullstack & Mobile Developer.
+**Evgeniy Nekroz** — Aspiring Fullstack & Fast Developer.
 * GitHub: https://github.com/evgeniynekroz
 * Telegram: @NekrozDEV
 
