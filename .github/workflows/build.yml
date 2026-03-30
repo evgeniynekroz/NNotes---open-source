@@ -13,6 +13,10 @@ jobs:
           cache: true
       - name: Create Flutter project skeleton
         run: flutter create --project-name nnotes --org com.nekroz .
+      - name: Enable core library desugaring
+        run: |
+          sed -i 's/compileOptions {/compileOptions {\n        isCoreLibraryDesugaringEnabled = true/' android/app/build.gradle
+          sed -i 's/dependencies {/dependencies {\n    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.1.4")/' android/app/build.gradle
       - name: Install dependencies
         run: flutter pub get
       - name: Generate launcher icons
