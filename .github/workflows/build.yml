@@ -11,26 +11,27 @@ jobs:
         with:
           channel: stable
           cache: true
-      - name: Create Flutter project skeleton
-        run: flutter create --project-name nnotes --org com.nekroz --platforms android .
+      - name: Setup Flutter project
+        run: |
+          mv pubspec.yaml pubspec.yaml.bak
+          mv lib lib.bak
+          flutter create --project-name nnotes --org com.nekroz .
+          cp pubspec.yaml.bak pubspec.yaml
+          rm -rf lib
+          cp -r lib.bak lib
       - name: Enable core library desugaring
         run: |
           python3 - <<'EOF'
-          import re
           with open('android/app/build.gradle', 'r') as f:
               content = f.read()
           content = content.replace(
               'compileOptions {',
-              'compileOptions {\n        isCoreLibraryDesugaringEnabled = true'
-          )
+              'compileOptions {\n        isCoreLibraryDesugaringEnabled = true', 1)
           content = content.replace(
               'dependencies {',
-              'dependencies {\n    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.1.4")',
-              1
-          )
+              'dependencies {\n    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.1.4")', 1)
           with open('android/app/build.gradle', 'w') as f:
               f.write(content)
-          print("Done")
           EOF
       - name: Install dependencies
         run: flutter pub get
