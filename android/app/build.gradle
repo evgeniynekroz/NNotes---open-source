@@ -1,19 +1,14 @@
-def localProperties = new Properties()
-def localPropertiesFile = rootProject.file('local.properties')
-if (localPropertiesFile.exists()) {
-    localPropertiesFile.withReader('UTF-8') { reader -> localProperties.load(reader) }
+plugins {
+    id "com.android.application"
+    id "dev.flutter.flutter-gradle-plugin"
 }
-def flutterRoot = localProperties.getProperty('flutter.sdk')
-apply plugin: 'com.android.application'
-apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
-
 android {
     namespace "com.nekroz.nnotes"
-    compileSdkVersion 34
+    compileSdk 34
     defaultConfig {
         applicationId "com.nekroz.nnotes"
-        minSdkVersion 21
-        targetSdkVersion 34
+        minSdk 21
+        targetSdk 34
         versionCode 1
         versionName "1.0.0"
         multiDexEnabled true
@@ -27,8 +22,8 @@ android {
         release { signingConfig signingConfigs.debug }
     }
 }
-flutter { source '../..' }
+flutter { source "../.." }
 dependencies {
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.1.4")
-    implementation 'androidx.multidex:multidex:2.0.1'
+    implementation "androidx.multidex:multidex:2.0.1"
 }
