@@ -11,30 +11,9 @@ jobs:
         with:
           channel: stable
           cache: true
-      - name: Create android folder
-        run: |
-          flutter create --project-name nnotes --org com.nekroz /tmp/nnotes_tmp
-          cp -r /tmp/nnotes_tmp/android ./android
-      - name: Enable core library desugaring
-        run: |
-          python3 - <<'EOF'
-          with open('android/app/build.gradle', 'r') as f:
-              content = f.read()
-          content = content.replace(
-              'compileOptions {',
-              'compileOptions {\n        isCoreLibraryDesugaringEnabled = true', 1)
-          content = content.replace(
-              'dependencies {',
-              'dependencies {\n    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.1.4")', 1)
-          with open('android/app/build.gradle', 'w') as f:
-              f.write(content)
-          EOF
-      - name: Install dependencies
-        run: flutter pub get
-      - name: Generate launcher icons
-        run: dart run flutter_launcher_icons
-      - name: Build APK
-        run: flutter build apk --release
+      - run: flutter pub get
+      - run: dart run flutter_launcher_icons
+      - run: flutter build apk --release
       - uses: actions/upload-artifact@v4
         with:
           name: android-apk
