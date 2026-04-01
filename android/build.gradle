@@ -1,9 +1,29 @@
-allprojects {
-    repositories {
-        google()
-        mavenCentral()
+plugins {
+    id "com.android.application"
+    id "dev.flutter.flutter-gradle-plugin"
+}
+android {
+    namespace "com.nekroz.nnotes"
+    compileSdk 34
+    defaultConfig {
+        applicationId "com.nekroz.nnotes"
+        minSdk 21
+        targetSdk 34
+        versionCode 1
+        versionName "1.0.0"
+        multiDexEnabled true
+    }
+    compileOptions {
+        coreLibraryDesugaringEnabled true
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    buildTypes {
+        release { signingConfig signingConfigs.debug }
     }
 }
-rootProject.buildDir = "../build"
-subprojects { project.buildDir = "${rootProject.buildDir}/${project.name}" }
-task clean(type: Delete) { delete rootProject.buildDir }
+flutter { source "../.." }
+dependencies {
+    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.1.4")
+    implementation "androidx.multidex:multidex:2.0.1"
+}
